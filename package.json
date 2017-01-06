@@ -1,0 +1,27 @@
+{
+    "name": "ddq-backend-tests",
+    "version": "2.0.0",
+    "description": "Tests for DDQ backend plugins.",
+    "author": "DDQ Team",
+    "contributors": [
+        {
+            "name": "Andy Gertjejansen",
+            "url": "https://github.com/quantumew"
+        },
+        {
+            "name": "Lucas Nagle",
+            "url": "https://github.com/lnagle93"
+        }
+    ],
+    "keywords": [
+        "ddq",
+        "deduplicated",
+        "message",
+        "queue",
+        "tests"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "ddq": "^2.0.0"
+    }
+}
