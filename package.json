@@ -21,7 +21,5 @@
         "tests"
     ],
     "license": "MIT",
-    "dependencies": {
-        "ddq": "^2.0.0"
-    }
+    "repository": "https://github.com/tests-always-included/ddq-backend-tests"
 }

@@ -3,8 +3,7 @@
 var config, Plugin;
 
 config = require("./manual-testing-config");
-config.backend = process.argv[2];
-Plugin = require("..");
+Plugin = require("../../../");
 
 
 /**
@@ -59,12 +58,3 @@ function manualTest(fn, done) {
 manualTest((instance, done) => {
     instance.sendMessage("Test Message", "Test Topic", done);
 }, doneCb);
-
-setTimeout(() => {
-    manualTest((instance, done) => {
-        instance.startListening();
-        instance.sendMessage("Test Message", "Test Topic", done);
-        instance.stopListening();
-    }, doneCb);
-}, 3000);
-

@@ -4,22 +4,21 @@ var assert, config, errCount, Plugin, runNext, testCounter, tests;
 
 assert = require("assert");
 config = require("./manual-testing-config");
-config.backend = process.argv[2];
 errCount = 0;
-Plugin = require("..");
+Plugin = require("../../../");
 testCounter = 0;
 tests = [
     {
         name: "heartbeat",
-        query: "INSERT INTO ?? (hash, isProcessing, owner, messageBase64) VALUES('123', true, ?, '456');"
+        query: "INSERT INTO ?? (hash, isProcessing, owner, messageBase64, message, topic) VALUES('123', true, ?, '456', 'message', 'Test Topic');"
     },
     {
         name: "requeue",
-        query: "INSERT INTO ?? (hash, messageBase64) VALUES ('345', '789');"
+        query: "INSERT INTO ?? (hash, messageBase64, message, topic) VALUES ('345', '789', 'message', 'Test Topic');"
     },
     {
         name: "remove",
-        query: "INSERT INTO ?? (hash, requeued, owner, messageBase64) VALUES('456', false, ?, '789');"
+        query: "INSERT INTO ?? (hash, requeued, owner, messageBase64, message, topic) VALUES('456', false, ?, '789', 'message', 'Test Topic');"
     }
 ];
 
@@ -66,13 +65,7 @@ function cleanup(instance, done, fn) {
                 assert(data.affectedRows);
             }
 
-            instance.disconnect((err) => {
-                if (err) {
-                    done(err);
-                }
-
-                runNext(doneCb);
-            });
+            runNext(doneCb);
         }
     );
 }
@@ -156,7 +149,8 @@ runNext = function (done) {
     if (tests[testCounter]) {
         wrappedMessageTest(tests[testCounter].name, tests[testCounter].query, done);
     } else {
-        assert(errCount, 0, `Error Count: ${errCount}`);
+        assert.equal(errCount, 0, `Error Count: ${errCount}`);
+        process.exit(0);
     }
 
     return;
