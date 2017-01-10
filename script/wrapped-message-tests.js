@@ -1,10 +1,11 @@
 "use strict";
 
-var assert, config, errCount, Plugin, runNext, testCounter, tests;
+var assert, config, errCount, exit, Plugin, runNext, testCounter, tests;
 
 assert = require("assert");
 config = require("./manual-testing-config");
 errCount = 0;
+exit = process.exit;
 Plugin = require("../../../");
 testCounter = 0;
 tests = [
@@ -54,15 +55,15 @@ function cleanup(instance, done, fn) {
                 console.error("There was a problem wiping the database.");
                 console.error("Other tests may be affected by this failure.");
                 done(cleanupErr);
-            }
+            } else {
+                instance.removeAllListeners();
+                console.log("Cleanup was successful");
 
-            instance.removeAllListeners();
-            console.log("Cleanup was successful");
-
-            // This should be 0 in the case of remove, which is why the assert
-            // isn't run for remove.
-            if (fn && (fn === "heartbeat" || fn === "requeue")) {
-                assert(data.affectedRows);
+                // This should be 0 in the case of remove, which is why the assert
+                // isn't run for remove.
+                if (fn && (fn === "heartbeat" || fn === "requeue")) {
+                    assert(data.affectedRows);
+                }
             }
 
             runNext(doneCb);
@@ -89,12 +90,10 @@ function prepTest(instance, query, done) {
             if (prepErr) {
                 done(prepErr);
                 cleanup(instance, done);
-
-                return;
+            } else {
+                console.log("CheckNow prep was successful", prepData);
+                instance.startListening();
             }
-
-            console.log("CheckNow prep was successful", prepData);
-            instance.startListening();
         }
     );
 }
@@ -118,13 +117,14 @@ function wrappedMessageTest(fn, query, done) {
         data[fn]((err, fnData) => {
             if (err) {
                 done(err);
+            } else {
+                console.log(`${fn} test was successful.`);
+                console.log(`${fn} data:`);
+
+                // This should be undefined for remove.
+                console.log(fnData);
             }
 
-            console.log(`${fn} test was successful.`);
-            console.log(`${fn} data:`);
-
-            // This should be undefined for remove.
-            console.log(fnData);
             cleanup(instance, done, fn);
         });
     });
@@ -135,11 +135,10 @@ function wrappedMessageTest(fn, query, done) {
     instance.connect((err) => {
         if (err) {
             done(err);
-
-            return;
+            cleanup(instance, done);
+        } else {
+            prepTest(instance, query, done);
         }
-
-        prepTest(instance, query, done);
     });
 }
 
@@ -150,10 +149,8 @@ runNext = function (done) {
         wrappedMessageTest(tests[testCounter].name, tests[testCounter].query, done);
     } else {
         assert.equal(errCount, 0, `Error Count: ${errCount}`);
-        process.exit(0);
+        exit(0);
     }
-
-    return;
 };
 
 wrappedMessageTest(tests[testCounter].name, tests[testCounter].query, doneCb);
