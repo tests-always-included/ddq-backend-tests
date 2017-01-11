@@ -4,7 +4,7 @@ var assert, config, Plugin;
 
 assert = require("assert");
 config = require("./manual-testing-config");
-Plugin = require("../../../");
+Plugin = require(process.cwd());
 
 
 /**

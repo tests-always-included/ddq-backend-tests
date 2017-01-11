@@ -3,7 +3,7 @@
 var config, Plugin;
 
 config = require("./manual-testing-config");
-Plugin = require("../../../");
+Plugin = require(process.cwd());
 
 
 /**

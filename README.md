@@ -1,7 +1,16 @@
 DDQ Backend Functional Tests
 ============================
 
-[![Build Status](https://travis-ci.org/not-nexus/shelf.svg?branch=master)](https://travis-ci.org/not-nexus/shelf)
+[![npm version][npm-badge]][npm-link]
+[![Build Status][travis-badge]][travis-link]
+[![Dependencies][dependencies-badge]][dependencies-link]
+[![Dev Dependencies][devdependencies-badge]][devdependencies-link]
+[![Build Status][travis-badge]][travis-link]
+[![Dependencies][dependencies-badge]][dependencies-link]
+[![Dev Dependencies][devdependencies-badge]][devdependencies-link]sssnpm version][npm-badge]][npm-link]
+[![Build Status][travis-badge]][travis-link]
+[![Dependencies][dependencies-badge]][dependencies-link]
+[![Dev Dependencies][devdependencies-badge]][devdependencies-link]
 
 Contains functional tests meant to be used by DDQ backend plugins. One example is [DDQ MySql Plugin](https://github.com/tests-always-included/ddq-backend-mysql).
 
@@ -37,4 +46,15 @@ The script referenced above runs a setup file for MySql. Again these are just ex
     );
 
 Also see the manual test config for the test configuration [here](script/manual-testing-config.js).
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/tests-always-included/ddq-backend-tests/master.svg
+[codecov-link]: https://codecov.io/github/tests-always-included/ddq-backend-tests?branch=master
+[dependencies-badge]: https://img.shields.io/david/tests-always-included/ddq-backend-tests.svg
+[dependencies-link]: https://david-dm.org/tests-always-included/ddq-backend-tests
+[devdependencies-badge]: https://img.shields.io/david/dev/tests-always-included/ddq-backend-tests.svg
+[devdependencies-link]: https://david-dm.org/tests-always-included/ddq-backend-tests#info=devDependencies
+[npm-badge]: https://img.shields.io/npm/v/ddq-backend-tests.svg
+[npm-link]: https://npmjs.org/package/ddq-backend-tests
+[travis-badge]: https://img.shields.io/travis/tests-always-included/ddq-backend-tests/master.svg
+[travis-link]: http://travis-ci.org/tests-always-included/ddq-backend-tests
 

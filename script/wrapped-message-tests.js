@@ -6,7 +6,7 @@ assert = require("assert");
 config = require("./manual-testing-config");
 errCount = 0;
 exit = process.exit;
-Plugin = require("../../../");
+Plugin = require(process.cwd());
 testCounter = 0;
 tests = [
     {
