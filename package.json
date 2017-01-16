@@ -3,6 +3,7 @@
     "version": "2.0.0",
     "description": "Tests for DDQ backend plugins.",
     "author": "DDQ Team",
+    "main": "./lib/index.js",
     "contributors": [
         {
             "name": "Andy Gertjejansen",
