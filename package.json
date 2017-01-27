@@ -1,0 +1,32 @@
+{
+    "name": "ddq-backend-tests",
+    "version": "2.0.0",
+    "description": "Tests for DDQ backend plugins.",
+    "author": "DDQ Team",
+    "main": "./lib/index.js",
+    "contributors": [
+        {
+            "name": "Andy Gertjejansen",
+            "url": "https://github.com/quantumew"
+        },
+        {
+            "name": "Lucas Nagle",
+            "url": "https://github.com/lnagle93"
+        }
+    ],
+    "scripts": {
+        "test": "eslint ."
+    },
+    "keywords": [
+        "ddq",
+        "deduplicated",
+        "message",
+        "queue",
+        "tests"
+    ],
+    "devDependencies": {
+        "eslint": "^3.5.0"
+    },
+    "license": "MIT",
+    "repository": "https://github.com/tests-always-included/ddq-backend-tests"
+}
